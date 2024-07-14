@@ -16,7 +16,7 @@ export default function Welcome() {
         ring2Padding.value = 0;
         setTimeout(() => ring1Padding.value = withSpring(ring1Padding.value + hp(5)), 100);
         setTimeout(() => ring2Padding.value = withSpring(ring2Padding.value + hp(5.5)), 300);
-        setTimeout(() => navigation.navigate('Home'), 4500);
+        setTimeout(() => navigation.navigate('SignUp'), 2500);
     }, []);
 
     const ring1AnimatedStyle = useAnimatedStyle(() => {

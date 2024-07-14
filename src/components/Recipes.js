@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import {View, Text, Pressable, Image} from "react-native";
 import {heightPercentageToDP as hp} from "react-native-responsive-screen";
 import MasonryList from '@react-native-seoul/masonry-list';
@@ -7,8 +7,14 @@ import Loading from "./loading";
 import {useNavigation} from "@react-navigation/native";
 
 export default function Recipes ({categories,meals}) {
-
+    const [foods, setFoods] = useState(meals);
     const navigation = useNavigation();
+
+    useEffect(()=>{
+        if(searchResults > 0 ){
+            setFoods(searchResults)
+        }
+    },[searchResults])
 
     return(
         <Animated.View
@@ -17,7 +23,7 @@ export default function Recipes ({categories,meals}) {
             <Text style={{fontSize:hp(3)}} className='font-semibold text-neutral-600'>Recipes</Text>
             <View>
                 {
-                    categories.length==0 || meals.length==0?(
+                    categories.length===0 || meals.length===0?(
                         <Loading size='large' className='mt-20'/>
                     ):(
                         <MasonryList

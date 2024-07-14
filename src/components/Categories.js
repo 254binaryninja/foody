@@ -23,7 +23,7 @@ export default function Categories ({activeCategory,handleChangeCategory,categor
                            onPress={()=>handleChangeCategory(cat.strCategory)}
                            className='flex items-center space-y-1'
                            >
-                               <View className={'rounded-full p-[6px]'+ activeButtonClass}>
+                               <View className={`${activeButtonClass}'rounded-full p-[6px]'`}>
                                    <Image
                                    source={{uri: cat.strCategoryThumb}}
                                    style={{width:hp(6),height:hp(6)}}

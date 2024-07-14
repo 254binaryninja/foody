@@ -62,7 +62,7 @@ export default function DetailScreen(props) {
             <View className='flex-1 justify-center'>
                 <Image
                     source={{ uri: item.strMealThumb }}
-                    style={{ width: wp(98), height: hp(50), borderRadius: 53, borderBottomLeftRadius: 40, borderBottomRightRadius: 40, marginTop:4 ,marginLeft:2,marginRight:2}}
+                    style={{ width: wp(100), height: hp(50), borderRadius: 53, borderBottomLeftRadius: 40, borderBottomRightRadius: 40, marginTop:4}}
                     sharedTransitionTag={item.strMeal}
                 />
             </View>

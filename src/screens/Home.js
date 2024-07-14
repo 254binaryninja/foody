@@ -1,16 +1,48 @@
 import React,{useState,useEffect} from 'react';
-import {View, Text, ScrollView, Image, TextInput} from "react-native";
+import {View, Text, ScrollView, Image, TextInput, TouchableOpacity} from "react-native";
 import {StatusBar} from "expo-status-bar/build/StatusBar";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {Ionicons} from "@expo/vector-icons";
 import Categories from "../components/Categories";
 import axios from "axios";
 import Recipes from "../components/Recipes";
+import {db} from "../../config/firebase";
+import { useNavigation } from '@react-navigation/native';
+import { doc } from 'firebase/firestore';
+
 
 export default function Home () {
     const [activeCategory,setActiveCategory] = useState('Beef');
     const [categories,setCategories]= useState([]);
     const [meals,setMeals]=useState([]);
+    const [username,setUsername] = useState();
+    const [search, setSearch] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const navigation = useNavigation();
+
+    const getUser = async () =>{ 
+        const user = doc(db,'users',username)
+        setUsername(user.username) 
+    }
+   
+
+    const handleSearch = async ()=>{
+        if (!search) {
+            setSearchResults([]); // Clear results if search bar is empty
+            return;
+        }
+        try{
+            const response = await axios.get(`https://themealdb.com/api/json/v1/1/search.php?s=${search}`);
+            setSearchResults(response.data);
+            
+            
+
+        }catch (e) {
+            console.log("Got this error",e.message)
+        }
+    }
+
+
 
     const getCategories = async ()=>{
         try{
@@ -46,6 +78,7 @@ export default function Home () {
     useEffect(()=>{
     getCategories();
     getRecipes(activeCategory);
+    getUser();
     },[])
 
     return(
@@ -66,7 +99,7 @@ export default function Home () {
                 </View>
                 {/*{Greetings & punchline}*/}
                 <View className='mx-4 space-y-4 mb-2'>
-                    <Text style={{fontSize: hp(3)}} className='text-neutral-500 font-medium'>Hello Chemist</Text>
+                    <Text style={{fontSize: hp(3)}} className='text-neutral-500 font-medium'>Hello {" "} {username}</Text>
                     <View>
                         <Text style={{fontSize:hp(3.8)}} className='font-semibold'>Make your own food,</Text>
                     </View>
@@ -78,12 +111,16 @@ export default function Home () {
                     <TextInput
                     placeholder='Search any recipe'
                     placeholderTextColor='gray'
+                    value={search}
+                    onChangeText={value=>setSearch(value)}
                     style={{fontSize:hp(1.7)}}
                     className='flex-1 text-base mb-1 pl-3 -tracking-wider'
                     />
+                    <TouchableOpacity onPress={()=>{handleSearch && navigation.navigate('Search',{searchResults})}}>
                     <View className='bg-white p-4 rounded-full'>
                         <Ionicons name='search'size={hp(2.5)} color='gray'/>
                     </View>
+                    </TouchableOpacity>
                 </View>
                 {/*{categories}*/}
                 <View>
