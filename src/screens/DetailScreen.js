@@ -85,8 +85,8 @@ export default function DetailScreen(props) {
                         </View>
                         {/* misc */}
                         <View className='flex-row justify-around'>
-                            <View className='flex rounded-full bg-amber-400 p-2'>
-                                <View className='bg-white rounded-full flex items-center justify-center'
+                            <View className='flex rounded-lg bg-amber-400 p-2'>
+                                <View className='bg-white rounded-lg flex items-center justify-center'
                                       style={{ width: wp(6.5), height: hp(6.5) }}
                                 >
                                     <Ionicons name='alarm' size={hp(4)} color='#525252' className='p-4 m-2' />
@@ -96,8 +96,8 @@ export default function DetailScreen(props) {
                                     <Text style={{ fontSize: hp(1.3) }} className='font-bold text-neutral-700'>min</Text>
                                 </View>
                             </View>
-                            <View className='flex rounded-full bg-amber-400 p-2'>
-                                <View className='bg-white rounded-full flex items-center justify-center'
+                            <View className='flex rounded-lg bg-amber-400 p-2'>
+                                <View className='bg-white rounded-lg flex items-center justify-center'
                                       style={{ width: wp(6.5), height: hp(6.5) }}
                                 >
                                     <Ionicons name='people' size={hp(4)} color='#525252' className='p-4 m-2' />

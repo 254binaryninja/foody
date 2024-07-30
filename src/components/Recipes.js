@@ -7,14 +7,8 @@ import Loading from "./loading";
 import {useNavigation} from "@react-navigation/native";
 
 export default function Recipes ({categories,meals}) {
-    const [foods, setFoods] = useState(meals);
     const navigation = useNavigation();
-
-    useEffect(()=>{
-        if(searchResults > 0 ){
-            setFoods(searchResults)
-        }
-    },[searchResults])
+       
 
     return(
         <Animated.View
